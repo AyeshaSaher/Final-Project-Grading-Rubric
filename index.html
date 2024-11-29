@@ -18,22 +18,30 @@
         <h1>Discover Your Next Adventure</h1>
         <p>Your journey starts here!</p>
     </header>
+    
+    <!-- Search Bar Section -->
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search recommendations..." />
+        <button id="search-button">Search</button>
+        <button id="clear-button">Clear</button>
+    </div>
+
     <main>
-        <section class="recommendations">
+        <section class="recommendations" id="beach-recommendations">
             <h2>Beach Recommendations</h2>
             <div class="gallery">
                 <img src="beach1.jpg" alt="Beautiful Beach 1">
                 <img src="beach2.jpg" alt="Beautiful Beach 2">
             </div>
         </section>
-        <section class="recommendations">
+        <section class="recommendations" id="temple-recommendations">
             <h2>Temple Recommendations</h2>
             <div class="gallery">
                 <img src="temple1.jpg" alt="Famous Temple 1">
                 <img src="temple2.jpg" alt="Famous Temple 2">
             </div>
         </section>
-        <section class="recommendations">
+        <section class="recommendations" id="country-recommendations">
             <h2>Country Recommendations</h2>
             <div class="gallery">
                 <img src="country1.jpg" alt="Country 1">
@@ -41,9 +49,70 @@
             </div>
         </section>
     </main>
+    
     <footer>
         <p>&copy; 2024 Travel Recommendations</p>
     </footer>
+    
     <script src="script.js"></script>
+    
+    <script>
+        const searchButton = document.getElementById('search-button');
+        const clearButton = document.getElementById('clear-button');
+        const searchInput = document.getElementById('search-input');
+
+        // Recommendations data
+        const recommendations = {
+            beach: [
+                { src: "beach1.jpg", alt: "Beautiful Beach 1" },
+                { src: "beach2.jpg", alt: "Beautiful Beach 2" }
+            ],
+            temple: [
+                { src: "temple1.jpg", alt: "Famous Temple 1" },
+                { src: "temple2.jpg", alt: "Famous Temple 2" }
+            ],
+            country: [
+                { src: "country1.jpg", alt: "Country 1" },
+                { src: "country2.jpg", alt: "Country 2" }
+            ]
+        };
+
+        // Function to display recommendations based on search term
+        function displayRecommendations(term) {
+            const beachSection = document.getElementById('beach-recommendations');
+            const templeSection = document.getElementById('temple-recommendations');
+            const countrySection = document.getElementById('country-recommendations');
+
+            // Clear previous results
+            beachSection.style.display = 'none';
+            templeSection.style.display = 'none';
+            countrySection.style.display = 'none';
+
+            if (term.includes("beach")) {
+                beachSection.style.display = 'block';
+            }
+            if (term.includes("temple")) {
+                templeSection.style.display = 'block';
+            }
+            if (term.includes("country")) {
+                countrySection.style.display = 'block';
+            }
+        }
+
+        // Search button functionality
+        searchButton.addEventListener('click', () => {
+            const query = searchInput.value.toLowerCase();
+            displayRecommendations(query);
+        });
+
+        // Clear button functionality
+        clearButton.addEventListener('click', () => {
+            searchInput.value = '';
+            // Hide all sections
+            document.getElementById('beach-recommendations').style.display = 'block';
+            document.getElementById('temple-recommendations').style.display = 'block';
+            document.getElementById('country-recommendations').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
